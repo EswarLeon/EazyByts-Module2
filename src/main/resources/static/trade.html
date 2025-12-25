@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"> <!-- 🔥 Fix emoji & ₹ symbol -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trade Stocks</title>
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <!-- Common CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="header">
+    <h1>🔁 Buy / Sell Stocks</h1>
+    <p class="subtitle">Execute trades · Simulated market</p>
+</header>
+
+<main class="container">
+
+    <!-- TRADE CARD -->
+    <section class="card wallet-card">
+        <h2>📈 Trade Panel</h2>
+
+        <div style="margin-top: 20px; display: flex; flex-direction: column; gap: 15px;">
+
+            <label>Stock Symbol</label>
+            <select id="stockSymbol"
+                    style="padding:12px; border-radius:10px; border:none; font-size:1rem;">
+            </select>
+
+            <label>Quantity</label>
+            <input type="number" id="quantity" min="1"
+                   style="padding:12px; border-radius:10px; border:none; font-size:1rem;">
+
+            <div style="display:flex; gap:15px; margin-top:10px;">
+                <button onclick="buyStock()">BUY</button>
+                <button onclick="sellStock()">SELL</button>
+            </div>
+
+            <p id="message" style="margin-top:15px; font-weight:600;"></p>
+        </div>
+    </section>
+
+    <!-- NAVIGATION -->
+    <nav class="nav-bar">
+        <a href="dashboard.html">⬅ Back to Dashboard</a>
+    </nav>
+
+</main>
+
+<!-- AUTH -->
+<script src="js/auth.js"></script>
+
+<!-- TRADE LOGIC -->
+<script src="js/trade.js"></script>
+
+</body>
+</html>

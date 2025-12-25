@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"> <!-- 🔥 Fix emoji & ₹ symbol -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trade History</title>
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <!-- Common CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="header">
+    <h1>🧾 Trade History</h1>
+    <p class="subtitle">All buy & sell transactions</p>
+</header>
+
+<main class="container">
+
+    <!-- HISTORY TABLE -->
+    <section class="card table-card">
+        <h2>📊 Transaction Log</h2>
+
+        <table>
+            <thead>
+            <tr>
+                <th>Type</th>
+                <th>Stock</th>
+                <th class="center">Qty</th>
+                <th class="right">Price (₹)</th>
+                <th>Time</th>
+            </tr>
+            </thead>
+            <tbody id="historyTable">
+            <!-- Injected by JS -->
+            </tbody>
+        </table>
+    </section>
+
+    <!-- NAVIGATION -->
+    <nav class="nav-bar">
+        <a href="dashboard.html">⬅ Back to Dashboard</a>
+    </nav>
+
+</main>
+
+<!-- AUTH -->
+<script src="js/auth.js"></script>
+
+<!-- HISTORY LOGIC -->
+<script src="js/history.js"></script>
+
+</body>
+</html>

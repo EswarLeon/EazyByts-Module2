@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Login Page</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+
+        body, html {
+          height: 100%;
+          font-family: 'Poppins', sans-serif;
+          background: linear-gradient(45deg, #0f2027, #203a43, #2c5364);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          perspective: 1000px;
+          overflow: hidden;
+          color: #fff;
+        }
+
+        #bg {
+          position: fixed;
+          width: 120vw;
+          height: 120vh;
+          background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb') center/cover;
+          filter: brightness(0.4);
+          z-index: -2;
+          transition: transform 0.1s ease;
+        }
+
+        #overlay {
+          position: fixed;
+          inset: 0;
+          background:
+            radial-gradient(circle at 30% 40%, rgba(255,255,255,.08), transparent 70%),
+            radial-gradient(circle at 70% 60%, rgba(255,255,255,.04), transparent 70%);
+          z-index: -1;
+        }
+
+        .login-container {
+          background: rgba(255,255,255,0.1);
+          backdrop-filter: blur(10px);
+          padding: 3rem 2.5rem;
+          border-radius: 16px;
+          width: 360px;
+          box-shadow: 0 8px 32px rgba(0,0,0,.4);
+          transform-style: preserve-3d;
+          transition: transform .3s, box-shadow .3s;
+        }
+
+        h2 {
+          text-align: center;
+          margin-bottom: 2rem;
+          letter-spacing: 1px;
+        }
+
+        form {
+          display: flex;
+          flex-direction: column;
+          gap: 1.5rem;
+        }
+
+        label {
+          font-size: .9rem;
+          font-weight: 600;
+        }
+
+        input {
+          padding: .75rem 1rem;
+          border-radius: 40px;
+          border: none;
+          background: rgba(255,255,255,.15);
+          color: #eee;
+          font-size: 1rem;
+          outline: none;
+          transition: .3s;
+        }
+
+        input:focus {
+          background: rgba(255,255,255,.35);
+          box-shadow: 0 0 12px #71b7ff;
+          color: #222;
+          transform: scale(1.05);
+        }
+
+        .btns {
+          display: flex;
+          gap: 1rem;
+          margin-top: 1rem;
+        }
+
+        button {
+          flex: 1;
+          padding: .75rem;
+          font-size: 1.05rem;
+          font-weight: 700;
+          border: none;
+          border-radius: 40px;
+          cursor: pointer;
+          transition: .3s;
+        }
+
+        button.login {
+          background: linear-gradient(45deg, #42a5f5, #1e88e5);
+          color: #0f2027;
+          box-shadow: 0 0 12px #1e88e5;
+        }
+
+        button.login:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 0 18px #42a5f5;
+        }
+
+        button.register {
+          background: linear-gradient(45deg, #7b1fa2, #ab47bc);
+          color: #fff;
+          box-shadow: 0 0 14px #ab47bc;
+        }
+
+        button.register:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 0 20px #ce93d8;
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="bg"></div>
+<div id="overlay"></div>
+
+<main class="login-container">
+    <h2>Login</h2>
+
+    <form id="loginForm" novalidate>
+        <label for="username">Username</label>
+        <input type="text" id="username">
+
+        <label for="password">Password</label>
+        <input type="password" id="password">
+
+        <div class="btns">
+            <button type="submit" class="login">Login</button>
+            <button type="button" class="register" id="goRegister">Register</button>
+        </div>
+    </form>
+</main>
+
+<script>
+    const bg = document.getElementById('bg');
+    const card = document.querySelector('.login-container');
+
+    window.addEventListener('mousemove', e => {
+      let x = e.clientX / innerWidth - 0.5;
+      let y = e.clientY / innerHeight - 0.5;
+
+      bg.style.transform = `translate(${x * -15}px, ${y * -15}px) scale(1.05)`;
+      card.style.transform = `rotateX(${-y * 10}deg) rotateY(${x * 10}deg)`;
+    });
+
+    window.addEventListener('mouseout', () => {
+      bg.style.transform = 'translate(0,0) scale(1.05)';
+      card.style.transform = 'rotateX(0) rotateY(0)';
+    });
+
+    const form = document.getElementById('loginForm');
+
+    form.addEventListener('submit', async e => {
+        e.preventDefault();
+
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        if (!form.checkValidity()) {
+            form.reportValidity();
+            return;
+        }
+
+        const result = await submit(username, password);
+
+        // ✅ SUCCESS CHECK (IMPORTANT)
+        if (result.includes("Login successful")) {
+            // Redirect to dashboard
+            window.location.href = "dashboard.html";
+        } else {
+            alert(result);
+        }
+    });
+
+    async function submit(username, password) {
+        const response = await fetch(
+            "http://localhost:9090/api/user/login",
+            {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    username: username,
+                    password: password
+                })
+            }
+        );
+        return await response.text();
+    }
+
+    document.getElementById('goRegister').onclick = () => {
+        window.location.href = "register.html";
+    };
+</script>
+
+
+</body>
+</html>

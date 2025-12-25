@@ -1,0 +1,139 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* BODY */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: radial-gradient(circle at top, #1a1a1a, #000);
+    color: #f5f5f5;
+    min-height: 100vh;
+}
+
+/* HEADER */
+.header {
+    text-align: center;
+    padding: 40px 20px 20px;
+}
+
+.header h1 {
+    color: #d4af37;
+    font-size: 2.4rem;
+    letter-spacing: 1px;
+}
+
+.subtitle {
+    color: #bfa94a;
+    opacity: 0.8;
+    margin-top: 6px;
+}
+
+/* CONTAINER */
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 30px 20px 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* CARDS */
+.card {
+    background: #111;
+    border-radius: 18px;
+    padding: 30px;
+    box-shadow:
+        0 15px 40px rgba(0,0,0,0.8),
+        inset 0 0 0 1px rgba(212,175,55,0.15);
+}
+
+/* WALLET */
+.wallet-card h2 {
+    color: #ffd700;
+    margin-bottom: 12px;
+}
+
+.wallet-amount {
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: #ffd700;
+}
+
+/* TABLE */
+.table-card h2 {
+    color: #d4af37;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead th {
+    text-align: left;
+    padding: 14px;
+    color: #d4af37;
+    border-bottom: 1px solid rgba(212,175,55,0.35);
+}
+
+tbody td {
+    padding: 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+tbody tr:hover {
+    background: rgba(212,175,55,0.07);
+}
+
+.right {
+    text-align: right;
+}
+
+/* NAV BAR */
+.nav-bar {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+
+.nav-bar a,
+.nav-bar button {
+    padding: 12px 22px;
+    border-radius: 30px;
+    border: none;
+    background: linear-gradient(135deg, #d4af37, #ffd700);
+    color: #000;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    box-shadow: 0 6px 20px rgba(212,175,55,0.45);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.nav-bar a:hover,
+.nav-bar button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(255,215,0,0.7);
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+    .header h1 {
+        font-size: 1.8rem;
+    }
+
+    .wallet-amount {
+        font-size: 1.6rem;
+    }
+
+    table {
+        font-size: 0.9rem;
+    }
+}

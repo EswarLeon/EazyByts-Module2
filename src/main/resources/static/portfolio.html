@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"> <!-- 🔥 FIXES SYMBOL ISSUE -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <!-- Common CSS (shared across all pages) -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="header">
+    <h1>📦 My Portfolio</h1>
+    <p class="subtitle">Your holdings · Profit & Loss overview</p>
+</header>
+
+<main class="container">
+
+    <!-- PORTFOLIO TABLE CARD -->
+    <section class="card table-card">
+        <h2>📊 Holdings</h2>
+
+        <table>
+            <thead>
+            <tr>
+                <th>Stock</th>
+                <th class="center">Qty</th>
+                <th class="right">Buy Price (₹)</th>
+                <th class="right">Current Price (₹)</th>
+                <th class="right">P / L (₹)</th>
+            </tr>
+            </thead>
+            <tbody id="portfolioTable">
+            <!-- Injected by JS -->
+            </tbody>
+        </table>
+    </section>
+
+    <!-- NAVIGATION -->
+    <nav class="nav-bar">
+        <a href="dashboard.html">⬅ Back to Dashboard</a>
+    </nav>
+
+</main>
+
+<!-- AUTH CHECK -->
+<script src="js/auth.js"></script>
+
+<!-- PORTFOLIO LOGIC -->
+<script src="js/portfolio.js"></script>
+
+</body>
+</html>
