@@ -1,4 +1,3 @@
-// Load wallet balance (SESSION BASED)
 fetch("http://localhost:9090/api/wallet/balance", {
     method: "GET",
     credentials: "same-origin"
@@ -8,7 +7,6 @@ fetch("http://localhost:9090/api/wallet/balance", {
     document.getElementById("balance").innerText = data;
 });
 
-// Load live stocks
 function loadStocks() {
     fetch("http://localhost:9090/api/stocks")
         .then(res => res.json())
