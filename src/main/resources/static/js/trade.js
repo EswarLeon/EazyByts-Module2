@@ -3,7 +3,6 @@ const username = params.get("username") || "raj";
 
 const message = document.getElementById("message");
 
-// Load stocks into dropdown
 fetch("http://localhost:9090/api/stocks")
     .then(res => res.json())
     .then(stocks => {
@@ -16,17 +15,14 @@ fetch("http://localhost:9090/api/stocks")
         document.getElementById("stockSymbol").innerHTML = options;
     });
 
-// BUY STOCK
 function buyStock() {
     trade("buy");
 }
 
-// SELL STOCK
 function sellStock() {
     trade("sell");
 }
 
-// COMMON TRADE FUNCTION
 function trade(type) {
     const stockSymbol = document.getElementById("stockSymbol").value;
     const quantity = document.getElementById("quantity").value;
