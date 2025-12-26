@@ -23,7 +23,6 @@ public class TradeHistoryController {
         this.sessionService = sessionService;
     }
 
-    // ✅ SESSION-BASED HISTORY
     @GetMapping
     public List<TradeHistory> getHistory(HttpSession session) {
 
