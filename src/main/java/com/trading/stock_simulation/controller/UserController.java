@@ -26,15 +26,14 @@ public class UserController {
         this.walletRepository = walletRepository;
     }
 
-    // ✅ REGISTER
     @PostMapping("/register")
     public String register(@RequestBody RegisterRequest request) {
 
         if (userRepository.existsByEmail(request.getEmail()))
-            return "Email already registered ❌";
+            return "Email already registered ";
 
         if (userRepository.existsByUsername(request.getUsername()))
-            return "Username already exists ❌";
+            return "Username already exists ";
 
         User user = new User();
         user.setUsername(request.getUsername());
@@ -47,10 +46,9 @@ public class UserController {
         wallet.setBalance(100000.0);
         walletRepository.save(wallet);
 
-        return "User registered & wallet credited ₹1,00,000 ✅";
+        return "User registered & wallet credited ₹1,00,000 ";
     }
 
-    // ✅ LOGIN (NO INVALIDATE HERE)
     @PostMapping("/login")
     public String login(@RequestBody Loginuser loginuser,
                         HttpSession session) {
@@ -58,22 +56,21 @@ public class UserController {
         User user = userRepository.findByUsername(loginuser.getUsername());
 
         if (user == null)
-            return "Invalid Username ❌";
+            return "Invalid Username ";
 
         if (!passwordEncoder.matches(
                 loginuser.getPassword(),
                 user.getPassword()))
-            return "Invalid Password ❌";
+            return "Invalid Password ";
 
         session.setAttribute("LOGGED_IN_USER", user.getUsername());
 
-        return "Login successful ✅";
+        return "Login successful ";
     }
 
-    // ✅ LOGOUT
     @PostMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
-        return "Logged out successfully ✅";
+        return "Logged out successfully ";
     }
 }
