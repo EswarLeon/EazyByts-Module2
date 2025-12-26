@@ -32,14 +32,11 @@ public class TradingController {
         this.sessionService = sessionService;
     }
 
-    // ======================
-    // ✅ BUY STOCK (SESSION)
-    // ======================
+
     @PostMapping("/buy")
     public String buyStock(@RequestBody BuyStockRequest request,
                            HttpSession session) {
 
-        // 🔐 SESSION USER
         User user = sessionService.getLoggedInUser(session);
         if (user == null) return "Not logged in ❌";
 
@@ -57,11 +54,9 @@ public class TradingController {
             return "Insufficient balance ❌";
         }
 
-        // 💰 Deduct wallet
         wallet.setBalance(wallet.getBalance() - totalCost);
         walletRepository.save(wallet);
 
-        // 📦 Portfolio update
         Portfolio portfolio =
                 portfolioRepository.findByUserAndStock(user, stock);
 
@@ -80,7 +75,6 @@ public class TradingController {
 
         portfolioRepository.save(portfolio);
 
-        // 🧾 Trade history
         tradeHistoryRepository.save(
                 new TradeHistory(
                         "BUY",
@@ -94,14 +88,10 @@ public class TradingController {
         return "Stock bought successfully ✅";
     }
 
-    // ======================
-    // ✅ SELL STOCK (SESSION)
-    // ======================
     @PostMapping("/sell")
     public String sellStock(@RequestBody SellStockRequest request,
                             HttpSession session) {
 
-        // 🔐 SESSION USER
         User user = sessionService.getLoggedInUser(session);
         if (user == null) return "Not logged in ❌";
 
@@ -125,11 +115,9 @@ public class TradingController {
         double sellAmount =
                 stock.getPrice() * request.getQuantity();
 
-        // 💰 Credit wallet
         wallet.setBalance(wallet.getBalance() + sellAmount);
         walletRepository.save(wallet);
 
-        // 📉 Update portfolio
         int remainingQty =
                 portfolio.getQuantity() - request.getQuantity();
 
@@ -140,7 +128,6 @@ public class TradingController {
             portfolioRepository.save(portfolio);
         }
 
-        // 🧾 Trade history
         tradeHistoryRepository.save(
                 new TradeHistory(
                         "SELL",
