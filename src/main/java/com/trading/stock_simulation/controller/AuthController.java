@@ -15,7 +15,6 @@ public class AuthController {
         this.sessionService = sessionService;
     }
 
-    // ✅ CHECK IF USER IS LOGGED IN
     @GetMapping("/check")
     public boolean checkLogin(HttpSession session) {
 
